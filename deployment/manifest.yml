@@ -1,0 +1,8 @@
+applications:
+- path: AutoScaleTestApp.war
+  memory: 256M
+  instances: 1
+  domain: mybluemix.net
+  name: simple-toolchain-001
+  host: simple-toolchain-001-dad
+  disk_quota: 256M

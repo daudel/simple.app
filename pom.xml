@@ -5,7 +5,7 @@
   <groupId>simple.app</groupId>
   <artifactId>simple.app</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
 
   <name>simple.app</name>
   <url>http://maven.apache.org</url>
@@ -15,6 +15,12 @@
   </properties>
 
   <dependencies>
+      <dependency>
+      <groupId>org.apache.geronimo.specs</groupId>
+      <artifactId>geronimo-servlet_3.0_spec</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -22,4 +28,52 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  
+  <build>
+    <plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-war-plugin</artifactId>
+			<configuration>
+				<failOnMissingWebXml>false</failOnMissingWebXml>
+				<warName>simple.app</warName>
+			</configuration>
+		</plugin>
+		<plugin>
+			<groupId>net.wasdev.wlp.maven.plugins</groupId>
+			<artifactId>liberty-maven-plugin</artifactId>
+			<version>1.2.1</version>
+			<configuration>
+				<configFile>src/main/wlp/server.xml</configFile>
+				<bootstrapProperties>
+					<appLocation>../../../../../${project.build.finalName}</appLocation>
+				</bootstrapProperties>
+			</configuration>
+		</plugin>
+		<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.2</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<!-- here the phase you need -->
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target</outputDirectory>
+							<resources>
+								<resource>
+									<directory>deployment</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+    </plugins>
+  </build>
 </project>
