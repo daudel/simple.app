@@ -1,5 +1,5 @@
 ---
 inherit: manifest-base.yml
 applications:
-- name: simple.app
-  host: simple-app-prod
+- name: simple.app.prod
+  host: simple.app.prod
