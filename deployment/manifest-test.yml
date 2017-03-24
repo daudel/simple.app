@@ -1,5 +1,6 @@
 ---
 inherit: manifest-base.yml
 applications:
-- name: simple.app.test
-  host: simple.app.test
+- name: simple-app-test
+  host: simple-app-test
+  
