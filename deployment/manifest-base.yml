@@ -1,8 +1,8 @@
+---
 applications:
-- path: simple.app.war
+- name: simple.app
+  path: simple.app.war
   memory: 256M
   instances: 1
   domain: mybluemix.net
-  name: simple.app
-  host: simple-app-001-dad
   disk_quota: 256M
